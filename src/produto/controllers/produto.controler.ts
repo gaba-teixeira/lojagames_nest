@@ -1,10 +1,13 @@
 import {
+    Body,
   Controller,
   Get,
   HttpCode,
   HttpStatus,
   Param,
   ParseIntPipe,
+  Post,
+  Put,
 } from '@nestjs/common';
 import { ProdutoService } from '../services/produto.service';
 import { Produto } from '../entities/produto.entity';
@@ -29,5 +32,17 @@ export class ProdutoController {
   @HttpCode(HttpStatus.OK)
   findByName(@Param('nome') nome: string): Promise<Produto[]> {
     return this.produtoService.findByName(nome);
+  }
+
+  @Post()
+  @HttpCode(HttpStatus.CREATED)
+  create(@Body() produto: Produto): Promise<Produto> {
+    return this.produtoService.create(produto);
+  }
+
+  @Put()
+  @HttpCode(HttpStatus.OK)
+  update(@Body() produto: Produto): Promise<Produto> {
+    return this.produtoService.update(produto);
   }
 }
