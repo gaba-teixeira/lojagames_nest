@@ -6,6 +6,7 @@ import { ProdutoModule } from './produto/produto.module';
 import { Produto } from './produto/entities/produto.entity';
 import { Categoria } from './categorias/entities/categoria.entity';
 import { CategoriaModule } from './categorias/categoria.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { CategoriaModule } from './categorias/categoria.module';
     }),
     ProdutoModule,
     CategoriaModule,
+    AuthModule,
     
 
   ],

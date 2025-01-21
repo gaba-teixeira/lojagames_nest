@@ -17,7 +17,7 @@ export class ProdutoService {
     return this.produtoRepository.find({
       relations: {
         categoria: true,
-      },
+      },      
     });
   }
 

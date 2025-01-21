@@ -6,6 +6,7 @@ import {
   HttpCode,
   HttpStatus,
   Param,
+  ParseFloatPipe,
   ParseIntPipe,
   Post,
   Put,
@@ -38,7 +39,7 @@ export class ProdutoController {
   @Get('/preco-menor/:preco')
   @HttpCode(HttpStatus.OK)
   priceLessThan(
-    @Param('preco', ParseIntPipe) preco: number,
+    @Param('preco', ParseFloatPipe) preco: number,
   ): Promise<Produto[]> {
     return this.produtoService.priceLessThan(preco);
   }
@@ -46,7 +47,7 @@ export class ProdutoController {
   @Get('/preco-maior/:preco')
   @HttpCode(HttpStatus.OK)
   priceMoreThan(
-    @Param('preco', ParseIntPipe) preco: number,
+    @Param('preco', ParseFloatPipe) preco: number,
   ): Promise<Produto[]> {
     return this.produtoService.priceMoreThan(preco);
   }
