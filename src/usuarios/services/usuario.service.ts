@@ -62,6 +62,7 @@ export class UsuarioService {
     await this.findById(usuario.id);
 
     const buscaUsuario = await this.findByUsuario(usuario.usuario);
+    const { differenceInYears } = require('date-fns');
 
     if (buscaUsuario && buscaUsuario.id !== usuario.id)
       throw new HttpException(
@@ -69,6 +70,15 @@ export class UsuarioService {
         HttpStatus.BAD_REQUEST,
       );
 
+    const result = await differenceInYears(
+      new Date(),
+      new Date(usuario.data_nascimento),
+    );
+    if (result < 18)
+      throw new HttpException(
+        'O Usuario é menor de idade',
+        HttpStatus.FORBIDDEN,
+      );
     usuario.senha = await this.bcrypt.criptografarSenha(usuario.senha);
     return await this.usuarioRepository.save(usuario);
   }
